@@ -15,11 +15,11 @@
         }
     }
 </style>
-<div class="w-11/12 h-80">
+<div class="w-11/12 h-80 max-md:w-full z-10" id="runningProgramWindow" style="visibility:visible">
 <div class="border w-full flex flex-row justify-between items-start p-1">
     <div class="w-fit fontBar">Running Program</div>
     <div class="w-fit">
-            <button id="minimizeButton" class="p-1">
+            <button id="minimizeButtonCode" class="p-1">
                 <i class="fas fa-window-minimize"></i>
             </button>
             <button id="maximizeButton" class="p-1">
@@ -30,7 +30,7 @@
             </button>
         </div>
     </div>
-    <div class="w-full min-h-80 window" id="myDiv">
+    <div style="background-image: url('https://i.giphy.com/9WC8WTZsFxkRi.webp'); background-size: cover;"  class="w-full h-80 window" id="windowCode" >
         <pre id="typed-text" class="font" style="white-space: pre-wrap;"></pre> <!-- Pastikan properti ini -->
     </div>
 </div>
@@ -145,8 +145,8 @@ function typeText() {
     if (index < textToType.length) {
         document.getElementById('typed-text').innerHTML += textToType.charAt(index);
         index++;
-        const myDiv = document.getElementById('myDiv');
-        myDiv.scrollTop = myDiv.scrollHeight; // Tambahkan ini untuk scroll otomatis
+        const windowCode = document.getElementById('windowCode');
+        windowCode.scrollTop = windowCode.scrollHeight; // Tambahkan ini untuk scroll otomatis
         setTimeout(typeText, speed);
     } else {
         document.getElementById('typed-text').innerHTML += '<span class="blinking-cursor">_</span>';
@@ -154,5 +154,50 @@ function typeText() {
 }
 // Mulai animasi mengetik setelah halaman dimuat
 window.onload = typeText;
+
+
+document.getElementById('minimizeButtonCode').addEventListener('click', function() {
+    let windowRunningProgram = document.getElementById('runningProgramWindow')
+    let buttonRunningProgram = document.getElementById('runningProgramButton')
+    windowRunningProgram.style.visibility = 'hidden';
+    buttonRunningProgram.style.display = 'block';
+    });
+
+    // document.getElementById('maximizeButton').addEventListener('click', function() {
+    //     const myDiv = document.getElementById('myDiv');
+    //     if (myDiv.classList.contains('maximized')) {
+    //         myDiv.classList.remove('maximized');
+    //         myDiv.style.width = '50%'; // Example action to restore size
+    //     } else {
+    //         myDiv.classList.add('maximized');
+    //         myDiv.style.width = '100%'; // Example action to maximize
+    //     }
+    // });
+
+    // document.getElementById('closeButton').addEventListener('click', function() {
+    //     document.getElementById('myDiv').style.display = 'none'; // Example action for close
+    // });
+
+    //fungsi resize
+const resizable = document.getElementById('runningProgramWindow');
+const resizer = document.getElementById('windowCode');
+
+resizer.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    document.addEventListener('mousemove', resize);
+    document.addEventListener('mouseup', stopResize);
+});
+
+function resize(e) {
+    resizable.style.width = e.clientX - resizable.offsetLeft + 'px';
+    resizable.style.height = e.clientY - resizable.offsetTop + 'px';
+}
+
+function stopResize() {
+    document.removeEventListener('mousemove', resize);
+    document.removeEventListener('mouseup', stopResize);
+}
+
+
 })
 </script>

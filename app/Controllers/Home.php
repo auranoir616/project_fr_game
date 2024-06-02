@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\ModelGame;
+use App\Models\ModelUrl;
 
 class Home extends BaseController
 {
@@ -12,7 +13,9 @@ class Home extends BaseController
     public function GetGameUser(){
         $modelgame = new ModelGame();
         $datagame = $modelgame->findAll();
-        return ['datagame' => $datagame];
+        $modelurl = new ModelUrl();
+        $dataurl = $modelurl->findAll();
+        return ['datagame' => $datagame, 'dataurl' => $dataurl];
     }
 
 
@@ -21,8 +24,11 @@ class Home extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'belum login']);
         }else{
             $modelgame = new ModelGame();
+            $modelurl = new ModelUrl();
+            $dataurl = $modelurl->findAll();
             $datagame = $modelgame->findAll();
-            return view('adminpanel',['datagame' => $datagame]);
+
+            return view('adminpanel',['datagame' => $datagame, 'dataurl' => $dataurl]);
         }
 }
     public function login(){

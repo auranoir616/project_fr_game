@@ -21,12 +21,15 @@
         scrollbar-width: none;  /* Hapus scrollbar untuk Firefox */
     }
 
+
 </style>
-<div class="w-full h-28 mt-14">
-<div class="border w-full flex flex-row justify-between items-start p-1">
+<div class="w-full h-28 mt-14 z-10" id="ipWindow" style="visibility:visible">
+
+<div class="border w-full flex flex-row justify-between items-start p-1 cursor-move" >
+
     <div class="w-fit fontBar">Server IP Address</div>
     <div class="w-fit">
-            <button id="minimizeButton" class="p-1">
+            <button id="minimizeButtonIp" class="p-1">
                 <i class="fas fa-window-minimize"></i>
             </button>
             <button id="maximizeButton" class="p-1">
@@ -37,14 +40,18 @@
             </button>
         </div>
     </div>
-    <div class="window" >
+    <div class="window cursor-col-resize" id="resizer">
     <h1 class="font" ><span id="ip-address-server">Getting Server IP Address is: </span><span id="ip-address">Loading...</span></h1>
-    <p class="font">-------------------------------------------</p>
+    <p class="font">-------------------------------------</p>
     <p id='ipdesc' class="font">Connecting to Server...</p>
+    <!-- <div id="resizer"></div> -->
+
     </div>
 </div>
 
 <script>
+
+    //fungsi IP adress
     document.addEventListener("DOMContentLoaded", function() {
         let dataIp1 = Math.floor(Math.random() * 255) + 1;
         let dataIp2 = Math.floor(Math.random() * 255) + 1;
@@ -58,5 +65,35 @@
             },3000)
     
 });
+
+//fungsi minimize
+document.getElementById('minimizeButtonIp').addEventListener('click', function() {
+    let windowIp = document.getElementById('ipWindow')
+    let buttonIp = document.getElementById('ipButton')
+    windowIp.style.visibility = 'hidden';
+    buttonIp.style.display = 'block';
+    });
+
+
+//fungsi resize
+const resizable = document.getElementById('ipWindow');
+const resizer = document.getElementById('resizer');
+
+resizer.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    document.addEventListener('mousemove', resize);
+    document.addEventListener('mouseup', stopResize);
+});
+
+function resize(e) {
+    resizable.style.width = e.clientX - resizable.offsetLeft + 'px';
+    resizable.style.height = e.clientY - resizable.offsetTop + 'px';
+}
+
+function stopResize() {
+    document.removeEventListener('mousemove', resize);
+    document.removeEventListener('mouseup', stopResize);
+}
+
 
 </script>

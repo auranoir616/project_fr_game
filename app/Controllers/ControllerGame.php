@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\ModelGame;
+use App\Models\ModelUrl;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -19,7 +20,7 @@ class ControllerGame extends BaseController
                 $validationRules = [
                 'nama_game' => 'required',
                 'gambar_game' => 'uploaded[gambar_game]|mime_in[gambar_game,image/jpg,image/jpeg,image/png,image/gif,image/webp]',
-                'url_game' => 'required',
+                // 'url_game' => 'required',
             ];
             if(!$this->validate($validationRules)){
                 return redirect()->back()->withInput()->with('error', 'terjadi error saat upload gambar');
@@ -36,7 +37,8 @@ class ControllerGame extends BaseController
                 $modelgame = new ModelGame();
                 $modelgame->insert([
                     'nama_game'=> $this->request->getPost('nama_game'),
-                    'url_game' => $this->request->getPost('url_game'),
+                    // 'url_game' => $this->request->getPost('url_game'),
+                    'url_game' => "url",
                     'gambar_game' => $newName,
                 ]);
                 return redirect()->back()->with('success', 'tambah game sukses');
@@ -67,6 +69,27 @@ class ControllerGame extends BaseController
         }
     }
 
+    public function AddUrl(){
+        if(!session()->has('id')){
+            return redirect()->back()->with('error', 'Belum Login');
+        }else{
+            $validationRules = [
+            'link_url_redirect' => 'required',
+            'link_url_display' => 'required',
+        ];
+        if(!$this->validate($validationRules)){
+            return redirect()->back()->withInput()->with('error', 'terjadi error saat Menambahkan Url');
+        }
+            $modelurl = new ModelUrl();
+
+            $modelurl->update(1,[
+                'link_url_redirect'=> $this->request->getPost('link_url_redirect'),
+                'link_url_display' => $this->request->getPost('link_url_display'),
+            ]);
+            return redirect()->back()->with('success', 'tambah Url sukses');
+    }
+
+    }
 
 }
 

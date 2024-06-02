@@ -90,14 +90,19 @@
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
+    #buttonRunning,  #buttonReset:hover{
+        cursor: pointer;
+        background: #00FF00;
+        color: black;
+    }
 
 
 </style>
-<div class="w-full h-60 bg-black borderWindow">
+<div class="w-full h-60 bg-black borderWindow" id="loginWindow" style="visibility:visible">
     <div class="border w-full flex flex-row justify-between items-start p-1">
     <div class="w-fit fontBar">Login Credentials</div>
     <div class="w-fit">
-            <button id="minimizeButton" class="p-1">
+            <button id="minimizeButtonLogin" class="p-1">
                 <i class="fas fa-window-minimize"></i>
             </button>
             <button id="maximizeButton" class="p-1">
@@ -130,7 +135,7 @@
             </table>
             <div class="flex w-full flex-row justify-center items-center m-2"> 
                 <button data-modal-target="static-modal-runningprogram" onclick="RunProgram()" data-modal-toggle="static-modal-runningprogram" type="button" class="buttonForm m-1" id="buttonRunning" disabled>Run Program</button>
-                <button type="reset" class="buttonForm m-1">Reset</button>
+                <button id="buttonReset" type="reset" class="buttonForm m-1">Reset</button>
             </div>
         </form>
     </div>
@@ -226,23 +231,32 @@ document.addEventListener("DOMContentLoaded", function() {
         
         validateInput();
     // Handle minimize, maximize, and close buttons
-    document.getElementById('minimizeButton').addEventListener('click', function() {
-        document.getElementById('myDiv').style.display = 'none'; // Example action for minimize
+    // document.getElementById('minimizeButtonCode').addEventListener('click', function() {
+    //     document.getElementById('myDiv').style.display = 'none'; // Example action for minimize
+    // });
+
+    // document.getElementById('maximizeButton').addEventListener('click', function() {
+    //     const myDiv = document.getElementById('myDiv');
+    //     if (myDiv.classList.contains('maximized')) {
+    //         myDiv.classList.remove('maximized');
+    //         myDiv.style.width = '50%'; // Example action to restore size
+    //     } else {
+    //         myDiv.classList.add('maximized');
+    //         myDiv.style.width = '100%'; // Example action to maximize
+    //     }
+    // });
+
+    // document.getElementById('closeButton').addEventListener('click', function() {
+    //     document.getElementById('myDiv').style.display = 'none'; // Example action for close
+    // });
+
+    //fungsi minimize
+    document.getElementById('minimizeButtonLogin').addEventListener('click', function() {
+    let loginWindow = document.getElementById('loginWindow')
+    let loginButton = document.getElementById('loginButton')
+    loginWindow.style.visibility = 'hidden';
+    loginButton.style.display = 'block';
     });
 
-    document.getElementById('maximizeButton').addEventListener('click', function() {
-        const myDiv = document.getElementById('myDiv');
-        if (myDiv.classList.contains('maximized')) {
-            myDiv.classList.remove('maximized');
-            myDiv.style.width = '50%'; // Example action to restore size
-        } else {
-            myDiv.classList.add('maximized');
-            myDiv.style.width = '100%'; // Example action to maximize
-        }
-    });
-
-    document.getElementById('closeButton').addEventListener('click', function() {
-        document.getElementById('myDiv').style.display = 'none'; // Example action for close
-    });
 });
 </script>

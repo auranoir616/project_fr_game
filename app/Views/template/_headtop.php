@@ -18,13 +18,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">   
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-            .body::-webkit-scrollbar {
-        display: none; /* Hapus scrollbar untuk Chrome, Safari, dan Opera */
-    }
-    .body {
-        -ms-overflow-style: none;  /* Hapus scrollbar untuk IE dan Edge */
-        scrollbar-width: none;  /* Hapus scrollbar untuk Firefox */
-    }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: Black; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #00FF00; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: gray; 
+}
     .container{
         margin: 5px;
         z-index: 50;
@@ -64,7 +76,7 @@
     .font{
         font-family: 'Courier New', Courier, monospace;
         color: #00FF00;
-        font-weight: lighter;
+        font-weight: bold;
     }
     .fontBar{
         font-family: 'Courier New', Courier, monospace;
@@ -85,5 +97,5 @@
 
 </style>
 </head>
-<body class="overflow-hidden bg-black p-0 m-0 text-green-300 body">
+<body class="overflow-auto bg-black p-0 m-0 text-green-300 body">
 

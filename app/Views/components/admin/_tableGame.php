@@ -1,4 +1,9 @@
-<div class="relative w-3/4 max-md:w-full overflow-x-auto shadow-md sm:rounded-lg overflow-auto">
+<div class="relative w-3/4 max-md:w-full overflow-x-auto shadow-md sm:rounded-lg overflow-auto mt-20">
+<div>
+   Url Display: <?php echo $dataurl[0]['link_url_redirect']; ?>
+   Url Display: <?php echo $dataurl[0]['link_url_display']; ?>
+</div>
+
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -7,9 +12,6 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Gambar Game
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Url Game
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Delete
@@ -23,13 +25,9 @@
                    <?= $game['nama_game']; ?>
                     </th>
                     <td class="px-6 py-4">
-                    <img src="/uploads/<?= $game['gambar_game']; ?>" class="w-16 md:w-10 max-w-full max-h-full" alt="Apple Watch">
+                    <img src="/uploads/<?= $game['gambar_game']; ?>" class=" md:w-28 max-w-full max-h-full" alt="Apple Watch">
                 </td>
-                </td>
-                <td class="px-6 py-4">
-                <?= $game['url_game']; ?>
-                </td>
-                <td class="px-6 py-4 text-right">
+                <td class="px-6 py-4 hover:cursor-pointer">
                 <a onclick="deleteProduct(<?= $game['id']; ?>)" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
                 </td>
             </tr>
